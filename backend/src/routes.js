@@ -6,15 +6,13 @@ const Dev = require("./models/dev");
 const routes = Router();
 
 routes.post("/devs", async (request, response) => {
-  const { github_user } = request.body;
+  const { github_user, techs } = request.body;
 
   const apiResponse = await axios.get(
     `https://api.github.com/users/${github_user}`
   );
 
-  const { name = login, avatar_url, bio, techs } = apiResponse.data;
-
-  console.log(apiResponse.data);
+  const { name = login, avatar_url, bio } = apiResponse.data;
 
   const techsArray = techs.split(",").map(tech => tech.trim());
 
@@ -25,8 +23,6 @@ routes.post("/devs", async (request, response) => {
     bio,
     techs: techsArray
   });
-
-  console.log(dev.data);
 
   return response.json(dev);
 });
