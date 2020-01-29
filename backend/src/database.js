@@ -6,6 +6,10 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
+  },
+  function(err) {
+    if (err) throw err;
+    console.log("Banco conectado com sucesso");
   }
 );
 
