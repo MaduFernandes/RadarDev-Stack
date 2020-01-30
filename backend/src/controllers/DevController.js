@@ -3,7 +3,7 @@ const Dev = require("../models/dev");
 const stringArray = require("../utils/stringArray");
 
 module.exports = {
-  async index(request, response) {
+  async index(request, response, next) {
     const devs = await Dev.find();
 
     return response.json(devs);

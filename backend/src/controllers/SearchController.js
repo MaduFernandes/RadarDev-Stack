@@ -1,9 +1,8 @@
 const Dev = require("../models/dev");
-const stringArray = require("../utils/stringArray");
 
 module.exports = {
-  async index(request, response) {
-    const { latitude, longitude, techs } = request.query;
+  async index(request, response, next) {
+    const { latitude, longitude } = request.query;
 
     const myUser = await Dev.findOne({ github_user: "MaduFernandes" }).catch(
       Error()
@@ -11,7 +10,7 @@ module.exports = {
 
     const devs = await Dev.find({
       techs: {
-        $in: myUser.techs
+        $in: myUser.qq
       },
       location: {
         $near: {
@@ -25,9 +24,14 @@ module.exports = {
     });
 
     return response.json({ devs });
+  },
+
+  async index(require, response, next) {
+    var id = require.body.id;
+
+    Dev.findByIdAndDelete(id).exec();
+    response.redirect("/backend/src/models/dev.js");
+
+    return console.log({ Devs: "removido" });
   }
-
-  //  async update({ });
-
-  // async delete();
 };
