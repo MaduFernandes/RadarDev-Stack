@@ -2,7 +2,7 @@ const Dev = require("../models/dev");
 
 module.exports = {
   async index(request, response, next) {
-    const { latitude, longitude } = request.query;
+    const { latitude, longitude, techs } = request.query;
 
     const myUser = await Dev.findOne({ github_user: "MaduFernandes" }).catch(
       Error()
@@ -10,7 +10,7 @@ module.exports = {
 
     const devs = await Dev.find({
       techs: {
-        $in: myUser.qq
+        $in: myUser.techs
       },
       location: {
         $near: {
