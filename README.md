@@ -8,6 +8,4 @@ Creation of the RadarDev of the Semana Omnistack 1.0
  - NodeJs
  - Express
  - MongoDB
- - React
- - React Native
 ```
